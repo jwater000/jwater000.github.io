@@ -44,11 +44,15 @@ social:
 # Site Verification Settings
 # webmaster_verifications:
 #   google: # fill in your Google verification code
-#   bing: # fill in your Bing verification code
-#   alexa: # fill in your Alexa verification code
-#   yandex: # fill in your Yandex verification code
-#   baidu: # fill in your Baidu verification code
+#   naver: # fill in your Naver verification code
+#   dauml: # fill in your Daum verification code
 #   facebook: # fill in your Facebook verification code
+#   instagram: # fill in your Instagram verification code
+#   youtube: # fill in your Youtube verification code
+#   tiktok: # fill in your TikTok verification code
+#   linkedin: # fill in your LinkedIn verification code
+#   github: # fill in your Github verification code
+
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
