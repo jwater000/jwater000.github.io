@@ -43,6 +43,227 @@
 
 To learn how to use, develop, and upgrade the project, please refer to the [Wiki][wiki].
 
+## 블로그 글 작성 및 업데이트 방법
+
+### 1. bundle 명령어 안내
+
+- **bundle install**
+  - Gemfile에 명시된 루비 젬(gem)들을 설치합니다.
+  - 프로젝트를 처음 클론했거나, Gemfile이 변경된 후 실행합니다.
+  - 명령어:
+    ```bash
+    bundle install
+    ```
+
+- **bundle update**
+  - Gemfile에 명시된 젬들의 버전을 최신으로 업데이트합니다.
+  - 패키지 전체를 최신화하고 싶을 때 사용합니다.
+  - 명령어:
+    ```bash
+    bundle update
+    ```
+
+- **bundle exec jekyll serve**
+  - Jekyll 개발 서버를 실행하여 로컬에서 블로그를 미리 볼 수 있습니다.
+  - 명령어:
+    ```bash
+    bundle exec jekyll serve
+    ```
+
+---
+
+### 2. 블로그 글 작성 및 Git을 통한 업로드 과정
+
+1. **새 글 작성**
+   - `_posts` 폴더에 새로운 마크다운 파일(`YYYY-MM-DD-제목.md`)을 생성합니다.
+   - 파일 상단에 YAML Front Matter(메타데이터)를 작성합니다. 예시:
+     ```markdown
+     ---
+     title: "글 제목"
+     date: YYYY-MM-DD HH:MM:SS +0900
+     categories: [카테고리1, 카테고리2]
+     tags: [태그1, 태그2]
+     ---
+     ```
+   - 본문을 마크다운 형식으로 작성합니다.
+
+2. **로컬에서 블로그 확인**
+   - 터미널에서 아래 명령어로 Jekyll 서버를 실행합니다.
+     ```bash
+     bundle exec jekyll serve
+     ```
+   - 브라우저에서 `http://localhost:4000`에 접속하여 글이 정상적으로 보이는지 확인합니다.
+
+3. **수정 및 저장**
+   - 필요시 글을 수정하고 저장합니다.
+   - 이미지 등 추가 리소스는 `assets/img/` 등 적절한 폴더에 저장합니다.
+
+4. **Git을 통한 업로드**
+   - 변경사항을 확인합니다.
+     ```bash
+     git status
+     ```
+   - (필요시) 변경 내용을 상세히 확인합니다.
+     ```bash
+     git diff
+     ```
+   - 변경된 파일을 스테이징합니다.
+     ```bash
+     git add .
+     ```
+   - 커밋 메시지를 작성합니다.
+     ```bash
+     git commit -m "블로그 글 추가: [글 제목]"
+     ```
+   - 원격 저장소(GitHub 등)에 푸시합니다.
+     ```bash
+     git push origin master
+     ```
+
+5. **배포 확인**
+   - GitHub Pages 등에서 배포가 완료되면, 실제 블로그 주소에서 글이 정상적으로 보이는지 확인합니다.
+
+## 마크다운 삽입 예시
+
+### 1. 이미지 추가 방법
+- `assets/img/` 폴더에 이미지를 저장한 후, 아래와 같이 삽입합니다.
+  ```markdown
+  ![이미지 설명](/assets/img/파일명.확장자)
+  ```
+- 크기 조절 등 스타일이 필요하면 HTML 태그 사용:
+  ```html
+  <img src="/assets/img/파일명.확장자" alt="이미지 설명" width="600"/>
+  ```
+
+### 2. 동영상 추가 방법
+- **동영상 파일 업로드:**
+  - 동영상 파일을 `assets/video/` 폴더에 저장하세요. (예: `assets/video/my-video.mp4`)
+- **HTML `<video>` 태그로 삽입:**
+  ```html
+  <video src="/assets/video/파일명.mp4" controls width="600"></video>
+  ```
+- **여러 동영상 파일을 관리하려면** `assets/video/` 폴더를 만들어 사용하면 좋습니다.
+- **이미지와 마찬가지로 절대경로(`/assets/video/파일명.mp4`)를 사용하세요.**
+- 유튜브 등 외부 동영상:
+  ```markdown
+  [![동영상 설명](https://img.youtube.com/vi/유튜브ID/0.jpg)](https://www.youtube.com/watch?v=유튜브ID)
+  ```
+
+### 3. 링크 추가 방법
+- 일반 링크:
+  ```markdown
+  [링크 설명](https://example.com)
+  ```
+- 새 창에서 열기 (HTML 사용):
+  ```html
+  <a href="https://example.com" target="_blank" rel="noopener">링크 설명</a>
+  ```
+
+### 4. HTML 웹페이지(iframe 등) 삽입 방법
+- 외부 웹페이지를 내 글에 임베드하려면 iframe 사용:
+  ```html
+  <iframe src="https://example.com" width="800" height="400" frameborder="0" allowfullscreen></iframe>
+  ```
+- 주의: 일부 마크다운 렌더러나 GitHub Pages 보안 정책에 따라 iframe이 제한될 수 있습니다.
+
+### 5. CSS와 함께 HTML 추가하는 방법
+- 마크다운 파일 내에서 HTML 태그에 직접 인라인 스타일을 적용할 수 있습니다.
+  ```html
+  <div style="color: blue; font-weight: bold;">파란색 굵은 텍스트</div>
+  ```
+- 여러 요소에 스타일을 적용하려면 `<style>` 태그를 사용할 수 있습니다.
+  ```html
+  <style>
+    .custom-box {
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 16px;
+      border-radius: 8px;
+    }
+    .custom-title {
+      color: #007acc;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  </style>
+  <div class="custom-box">
+    <span class="custom-title">커스텀 스타일 박스</span><br/>
+    이 영역은 CSS가 적용된 HTML입니다.
+  </div>
+  ```
+- 외부 CSS 파일을 불러오고 싶다면 `<link>` 태그를 사용할 수 있지만, GitHub Pages나 Chirpy 테마에서는 권장되지 않습니다. 대신 인라인 스타일이나 `<style>` 태그를 활용하세요.
+
+#### CSS 범위(스코프) 안전하게 설정하는 방법
+- `<style>` 태그로 CSS를 추가하면, 해당 규칙이 페이지 전체에 영향을 줄 수 있습니다.
+- **고유한 클래스명/ID 사용**: 다른 글이나 요소와 겹치지 않도록 고유한 이름을 사용하세요.
+  ```html
+  <style>
+    .my20240708-box { color: purple; }
+  </style>
+  <div class="my20240708-box">이것만 보라색</div>
+  ```
+- **부모-자식 선택자 활용**: 부모 요소에 고유 클래스를 주고, 그 하위에서만 스타일 적용
+  ```html
+  <style>
+    .my-section .custom-title { color: green; }
+  </style>
+  <div class="my-section">
+    <span class="custom-title">이것만 초록색</span>
+  </div>
+  ```
+- **인라인 스타일 사용**: 한 요소에만 스타일이 필요하다면 style 속성 사용
+  ```html
+  <span style="color: orange;">이것만 주황색</span>
+  ```
+- **Tip**: 클래스명/ID에 날짜, 글 제목 등 고유 정보를 포함하면 충돌을 예방할 수 있습니다.
+
+
+# 1. 인라인 스타일로 간단하게 꾸미기
+
+예시:
+```markdown
+<div style="background: #f9f9f9; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px #eee;">
+  <h2 style="color: #007acc; margin-top: 0;">축구 공간을 창조하라 북터뷰</h2>
+  <p style="font-size: 1.1em; color: #333;">
+    [![축구의 보이지 않는 문법](https://img.youtube.com/vi/Z9d1oyO5f3U/0.jpg)](https://www.youtube.com/watch?v=Z9d1oyO5f3U)
+  </p>
+</div>
+```
+
+---
+
+## 2. `<style>` 태그로 커스텀 클래스 정의
+
+예시:
+```html
+<style>
+  .pretty-box {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px #eee;
+  }
+  .pretty-title {
+    color: #007acc;
+    margin-top: 0;
+  }
+  .pretty-desc {
+    font-size: 1.1em;
+    color: #333;
+  }
+</style>
+
+<div class="pretty-box">
+  <h2 class="pretty-title">축구 공간을 창조하라 북터뷰</h2>
+  <p class="pretty-desc">
+    [![축구의 보이지 않는 문법](https://img.youtube.com/vi/Z9d1oyO5f3U/0.jpg)](https://www.youtube.com/watch?v=Z9d1oyO5f3U)
+  </p>
+</div>
+
+
+---
+
 ## Contributing
 
 Contributions (_pull requests_, _issues_, and _discussions_) are what make the open-source community such an amazing place
