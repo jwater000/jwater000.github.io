@@ -289,6 +289,67 @@ The avatar and favicon for the project's website are from [ClipartMAX][clipartma
 
 This project is published under [MIT License][license].
 
+## 블로그 마무리 작업 TODO 리스트
+
+- [ ] **검색 최적화(SEO) 작업**
+  - 메타 태그, 제목, 설명, 키워드 등 SEO 요소 점검 및 보완
+  - 각 포스트별로 적절한 카테고리/태그/요약 작성
+  - sitemap.xml, robots.txt 등 검색엔진 제출 파일 확인
+
+- [ ] **이미지 업데이트**
+  - 저해상도/누락 이미지 교체 및 추가
+  - alt 속성(대체 텍스트) 작성으로 접근성 및 SEO 강화
+  - 이미지 경로 및 파일명 일관성 점검
+
+- [ ] **링크 업데이트**
+  - 외부/내부 링크 정상 동작 여부 점검 및 수정
+  - 깨진 링크, 리다이렉트 등 오류 링크 교체
+  - 참고자료, 관련글 등 추가 링크 보완
+
+- [ ] **기타 점검 사항**
+  - 모바일/PC 등 다양한 환경에서 레이아웃 및 스타일 확인
+  - 오타, 맞춤법, 문장 흐름 등 최종 교정
+  - 불필요한 임시 파일, 테스트 포스트 삭제
+
+## 티스토리 → Jekyll 마이그레이션 자동화 가이드
+
+### 1. 티스토리 데이터 백업
+- 티스토리 관리자 → 환경설정 → 데이터 관리 → 데이터 백업(내보내기) 기능 사용
+- XML 파일로 글, 댓글, 카테고리, 태그 등 백업
+
+### 2. XML → 마크다운(.md) 변환
+- [tistory-to-markdown](https://github.com/gyuha/tistory-to-markdown) 또는 [jekyll-import](https://github.com/jekyll/jekyll-import) 등 오픈소스 도구 활용
+- 변환 도구 실행 예시:
+  ```bash
+  # Node.js 기반 tistory-to-markdown 예시
+  npx tistory-to-markdown --input tistory.xml --output ./_posts
+  ```
+- 각 글이 `_posts/YYYY-MM-DD-제목.md` 형식으로 변환됨
+- Front Matter(제목, 날짜, 카테고리, 태그 등) 자동/수동 보완
+
+### 3. 이미지 및 첨부파일 이동
+- 티스토리 이미지/첨부파일은 별도 다운로드 필요
+- [tistory-image-downloader](https://github.com/gyuha/tistory-image-downloader) 등 활용 가능
+- 다운로드한 이미지는 `/assets/img/` 등으로 이동 후, 마크다운 내 이미지 경로 일괄 수정
+
+### 4. 링크, 임베드, 스타일 등 보정
+- 내부/외부 링크, 유튜브 등 임베드 코드 마크다운에 맞게 수정
+- 필요시 HTML/CSS 스타일도 Jekyll에 맞게 보완
+
+### 5. 카테고리/태그 구조 점검
+- Jekyll의 `_data/categories.yml` 등으로 카테고리 구조 보완 가능
+- 각 포스트의 Front Matter에 카테고리/태그가 올바르게 들어갔는지 확인
+
+### 6. 로컬에서 미리보기 및 오류 수정
+- `bundle exec jekyll serve`로 로컬 확인
+- 깨진 이미지, 링크, 레이아웃 등 점검 및 수정
+
+### 7. GitHub에 업로드 및 배포
+- 정상적으로 변환된 글, 이미지, 설정 파일을 커밋/푸시
+- GitHub Pages에서 정상적으로 보이는지 최종 확인
+
+---
+
 [gem]: https://rubygems.org/gems/jekyll-theme-chirpy
 [ci]: https://github.com/cotes2020/jekyll-theme-chirpy/actions/workflows/ci.yml?query=event%3Apush+branch%3Amaster
 [codacy]: https://app.codacy.com/gh/cotes2020/jekyll-theme-chirpy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
@@ -303,3 +364,46 @@ This project is published under [MIT License][license].
 [lib]: https://github.com/cotes2020/chirpy-static-assets
 [vscode]: https://code.visualstudio.com/
 [jetbrains]: https://www.jetbrains.com/?from=jekyll-theme-chirpy
+
+
+## 블로그 마무리 작업 TODO 리스트
+
+- [ ] **검색 최적화(SEO) 작업**
+  - 메타 태그, 제목, 설명, 키워드 등 SEO 요소 점검 및 보완
+  - 각 포스트별로 적절한 카테고리/태그/요약 작성
+  - sitemap.xml, robots.txt 등 검색엔진 제출 파일 확인
+  - **Site Verification**: 구글, 빙, 네이버 등 검색엔진 인증 코드 입력
+
+- [ ] **웹 분석 도구 설정**
+  - Google Analytics, GoatCounter, Umami, Matomo, Cloudflare, Fathom 등 ID 입력 및 활성화
+
+- [ ] **댓글 시스템 설정**
+  - giscus, utterances, disqus 등 provider 및 옵션 설정
+
+- [ ] **대표 이미지/미리보기 이미지**
+  - avatar, social_preview_image 등 지정
+
+- [ ] **CDN 및 정적 자산 관리**
+  - cdn, assets.self_host 등 필요시 활성화
+
+- [ ] **기본 테마 모드 지정**
+  - theme_mode(light/dark) 설정
+
+- [ ] **티스토리 자료 마이그레이션**
+  - 티스토리 데이터 백업(XML)
+  - XML → 마크다운 변환 및 Front Matter 보완
+  - 이미지/첨부파일 다운로드 및 경로 수정
+  - 카테고리/태그 구조 점검
+  - 내부/외부 링크, 임베드, 스타일 보정
+  - 로컬 미리보기 및 오류 수정
+  - GitHub 업로드 및 배포
+
+- [ ] **이미지/링크/첨부파일 업데이트**
+  - 저해상도/누락 이미지 교체 및 추가
+  - alt 속성(대체 텍스트) 작성
+  - 이미지/링크 경로 및 파일명 일관성 점검
+
+- [ ] **기타 점검 사항**
+  - 모바일/PC 등 다양한 환경에서 레이아웃 및 스타일 확인
+  - 오타, 맞춤법, 문장 흐름 등 최종 교정
+  - 불필요한 임시 파일, 테스트 포스트 삭제
